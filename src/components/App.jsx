@@ -4,7 +4,6 @@ import data from '../data/data.json';
 import friends from '../data/friends.json';
 import transactions from '../data/transactions.json';
 
-
 const getRandomColor = () => {
   const letters = '0123456789ABCDEF';
   let color = '#';
@@ -39,19 +38,36 @@ const FriendList = ({ friends }) => {
     <ul className="friend-list">
       {friends.map((friend) => (
         <li className="item" key={friend.id}>
-          <span
-            className={`status ${friend.isOnline ? 'online' : 'offline'}`}
-          ></span>
-          <img
-            className="avatar"
-            src={friend.avatar}
-            alt="User avatar"
-            width="48"
-          />
+          <span className={`status ${friend.isOnline ? 'online' : 'offline'}`}></span>
+          <img className="avatar" src={friend.avatar} alt="User avatar" width="48" />
           <p className="name">{friend.name}</p>
         </li>
       ))}
     </ul>
+  );
+};
+
+const TransactionHistory = ({ items }) => {
+  return (
+    <table className="transaction-history">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Currency</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {items.map((transaction) => (
+          <tr key={transaction.id}>
+            <td>{transaction.type}</td>
+            <td>{transaction.amount}</td>
+            <td>{transaction.currency}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
@@ -60,7 +76,11 @@ const App = () => {
     <div>
       <div className="profile">
         <div className="description">
-          <img src={user.avatar} alt="User avatar" className="avatar" />
+          <img
+            src={user.avatar}
+            alt="User avatar"
+            className="avatar"
+          />
           <p className="name">{user.username}</p>
           <p className="tag">@{user.tag}</p>
           <p className="location">{user.location}</p>
@@ -86,31 +106,9 @@ const App = () => {
       <Statistics stats={data} />
 
       <FriendList friends={friends} />
+
+      <TransactionHistory items={transactions} />
     </div>
-  );
-};
-
-const TransactionHistory = ({ items }) => {
-  return (
-    <table className="transaction-history">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Amount</th>
-          <th>Currency</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {items.map((transaction) => (
-          <tr key={transaction.id}>
-            <td>{transaction.type}</td>
-            <td>{transaction.amount}</td>
-            <td>{transaction.currency}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
   );
 };
 
