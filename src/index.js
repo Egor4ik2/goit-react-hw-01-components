@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Profile from './components/profile/Profile';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Profile />
   </React.StrictMode>,
   document.getElementById('root')
 );
