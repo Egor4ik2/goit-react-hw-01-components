@@ -1,47 +1,56 @@
+
 import React from 'react';
-import styles from '../../css/profile/Profile.module.css';
-import user from '../../data/user/user.json';
-import friends from '../../data/friends/friends.json';
-import transactions from '../../data/transaction/transactions.json';
-import data from '../../data/data/data.json';
-import FriendList from '../friendList/FriendList';
-import Statistics from '../statistics/Statistics';
-import TransactionHistory from '../transaction/Transaction';
+// import PropTypes from 'prop-types';
+// import styles from './Profile.module.css';
+// import FriendList from '../friendList/FriendList';
+// import Statistics from '../statistics/Statistics';
+// import TransactionHistory from '../transaction/Transaction';
 
-const { username, tag, location, avatar, stats } = user;
+import css from './Profile.module.css';
+import PropTypes from 'prop-types';
 
-const Profile = () => {
-  const { followers = 0, views = 0, likes = 0 } = stats || {};
-
+export const Profile = ({
+  avatar,
+  username,
+  tag,
+  location,
+  stats: { followers, views, likes },
+}) => {
   return (
-    <div className={styles.profile}>
-      <div className={styles.description}>
-        <img src={avatar} alt="User avatar" className={styles.avatar} />
-        <p className={styles.name}>{username}</p>
-        <p className={styles.tag}>@{tag}</p>
-        <p className={styles.location}>{location}</p>
+    <div className={css.profile}>
+      <div className={css.description}>
+        <img src={avatar} alt="User avatar" className={css.avatar} />
+        <p className={css.name}>{username}</p>
+        <p className={css.tag}>{'@' + tag}</p>
+        <p className={css.location}>{location}</p>
       </div>
 
-      <ul className={styles.stats}>
+      <ul className={css.stats}>
         <li>
-          <span className={styles.label}>Followers</span>
-          <span className={styles.quantity}>{followers}</span>
+          <span className={css.label}>Followers</span>
+          <span className={css.quantity}>{followers}</span>
         </li>
         <li>
-          <span className={styles.label}>Views</span>
-          <span className={styles.quantity}>{views}</span>
+          <span className={css.label}>Views</span>
+          <span className={css.quantity}>{views}</span>
         </li>
         <li>
-          <span className={styles.label}>Likes</span>
-          <span className={styles.quantity}>{likes}</span>
+          <span className={css.label}>Likes</span>
+          <span className={css.quantity}>{likes}</span>
         </li>
       </ul>
-
-      <FriendList friends={friends} />
-      <Statistics title="Stats" stats={data} />
-      <TransactionHistory items={transactions} />
     </div>
   );
 };
 
-export default Profile;
+Profile.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  stats: PropTypes.shape({
+    followers: PropTypes.number.isRequired,
+    views: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired,
+  }),
+};

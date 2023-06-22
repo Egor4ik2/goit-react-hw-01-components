@@ -1,9 +1,9 @@
 @import-normalize;
-@import './css/friendsList/FriendList.module.css';
-@import './css/profile/Profile.module.css';
-@import './css/statistics/Statistics.module.css';
-@import './css/statistics/Statistics.module.css';
-@import './css/transaction/TransactionHistory.module.css';
+@import './components/friendList/FriendList.module.css';
+@import './components/profile/Profile.module.css';
+@import './components/statistics/Statistics.module.css';
+@import './components/friend-list-item/FriendListItem.module.css';
+@import './components/transaction/TransactionHistory.module.css';
 
 body {
   margin: 0;
